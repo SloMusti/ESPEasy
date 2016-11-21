@@ -82,7 +82,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
             postDataStr += temp_name.substring(commaIndex+1);
           }
           postDataStr += F("\", \"value\":");          
-          postDataStr += ExtraTaskSettings.TaskDeviceValueDecimals[x];
+          postDataStr += toString(UserVar[event->BaseVarIndex + x],ExtraTaskSettings.TaskDeviceValueDecimals[x]);
           postDataStr += F("}");
           //add a comma except on the last one
           if(x!=valueCount-1){
