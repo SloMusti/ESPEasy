@@ -65,7 +65,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
 
         postDataStr += F("},\"");
         postDataStr += ExtraTaskSettings.TaskDeviceName;
-        postDataStr += F("\": [");
+        postDataStr += F("\": ");
         
         byte valueCount = getValueCountFromSensorType(event->sensorType); // multivalue handling required, figure out json
         for (byte x = 0; x < valueCount; x++)
@@ -89,7 +89,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
             postDataStr += F(",");
             }
         }
-        postDataStr += F("]");
+        postDataStr += F("");
 
         //################################################################
         //footer
