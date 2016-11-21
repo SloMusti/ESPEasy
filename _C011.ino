@@ -62,7 +62,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
         // postDataStr +="},\"rssi\": {\"name\": \"WiFi signal strength\", \"unit\": \"dBm\", \"value\":";
         // postDataStr += String(WiFi.RSSI());
 
-        // the way this is done should work for multi measurement case, but it does not get digested by nodewatcher
+
         postDataStr += F("},\"");
         postDataStr += ExtraTaskSettings.TaskDeviceName;
         postDataStr += F("\": [");
@@ -82,7 +82,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
             postDataStr += temp_name.substring(commaIndex+1);
           }
           postDataStr += F("\", \"value\":");          
-          postDataStr += toString(UserVar[event->BaseVarIndex],ExtraTaskSettings.TaskDeviceValueDecimals[0]);
+          postDataStr += ExtraTaskSettings.TaskDeviceValueDecimals[x];
           postDataStr += F("}");
           //add a comma except on the last one
           if(x!=valueCount-1){
@@ -114,7 +114,8 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
         postStr += postDataStr;
 
         // This will send the request to the server
-        client.print(postStr);s
+        client.print(postStr);
+        //Serial.println(postStr);
 
         unsigned long timer = millis() + 200;
         while (!client.available() && millis() < timer)
