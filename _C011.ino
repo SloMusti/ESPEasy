@@ -73,7 +73,10 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
           //workaround since there is no unit field in the system
           String temp_name = String(ExtraTaskSettings.TaskDeviceValueNames[x]);
           int commaIndex = temp_name.indexOf(',');
-          
+
+          // grouping implementation
+          postDataStr += F("{\"group\": \"");
+          postDataStr += ExtraTaskSettings.TaskDeviceName; // same as Task device name
           postDataStr += F("{\"name\": \"");
           postDataStr += temp_name.substring(0, commaIndex);
           postDataStr += F("\", \"unit\": \"");
