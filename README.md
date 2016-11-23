@@ -46,5 +46,20 @@ ESPEasy is firmware for ESP8266 modules that is pre-programmed with software sup
   1. Set 'Value Name 1' to what data nama on teh graph will be, follow by comma and unit, this case: 'WiFi signal,dBm'
   1. Click Submit
   1. Click on Devices in top menu to see the value
+ 1. Repeat the process for diferent sensors, for example with DS18B20.
+  1. Configure Temperature by selecting 'Device' to be 'Temperature - DS18b20'
+  1. Pick 'Name' to be 'temp_a', note all devices configured must have different name+IDX combination, all sensors with same name will be groupe on a graph for nodewatcher.
+  1. Set 'Delay' to show how often a variable will be reported. 300 is a good value.
+  1. Set 'IDX / Var' to be non-zero, in this case 1
+  1. Set '1st GPIO' to be pin which you have the sensor conencted to
+  1. Set 'Value Name 1' to what data nama on the graph will be, follow by comma and unit, this case: 'YourTempName,C'
+  1. Click Submit
+  1. Now the 'Device Nr' will show one or more ROM IDs if connection to sensors works. Pick first one.
+  1. Click Submit
+ 1. Go to 'Device' menu and repeat the process for next sensor
+  1. Pick different IDX then in the first case
+  1. Click Submit
+  1. Now the 'Device Nr' will show one or more ROM IDs if connection to sensors works. Pick second one.
+  1. Click Submit
  
    
