@@ -66,7 +66,9 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
 
         postDataStr += F("},\"");
         postDataStr += ExtraTaskSettings.TaskDeviceName;
-        postDataStr += F("\": ");
+        postDataStr += F("_");
+        postDataStr += event->idx;;
+        postDataStr += F("\": {");
         
         byte valueCount = getValueCountFromSensorType(event->sensorType); // multivalue handling required, figure out json
         for (byte x = 0; x < valueCount; x++)
@@ -76,9 +78,10 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
           int commaIndex = temp_name.indexOf(',');
 
           // grouping implementation
-          postDataStr += F("{\"group\": \"");
+          postDataStr += F("\"group\": \"");
           postDataStr += ExtraTaskSettings.TaskDeviceName; // same as Task device name
-          postDataStr += F("{\"name\": \"");
+          postDataStr += F("\", ");
+          postDataStr += F("\"name\": \"");
           postDataStr += temp_name.substring(0, commaIndex);
           postDataStr += F("\", \"unit\": \"");
           //safeguard if unit is not entered
@@ -119,7 +122,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
 
         // This will send the request to the server
         client.print(postStr);
-        //Serial.println(postStr);
+        Serial.println(postStr);
 
         unsigned long timer = millis() + 200;
         while (!client.available() && millis() < timer)
