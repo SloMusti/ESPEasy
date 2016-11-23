@@ -1,21 +1,19 @@
 # ESPEasy
-Easy MultiSensor device based on ESP8266
+Easy MultiSensor device based on ESP8266. This is a forked repository from main branch, implementing specific features. It should be backwards compatible as it does not introduce many/any changes to the core.
 
-This is where development takes place. Beware that latest versions may be unstable.
-
-Stable versions including libraries are currently on SoureForge:
-
-http://sourceforge.net/projects/espeasy/
+Follow the websites of the main project here:
 
 Wiki: http://www.esp8266.nu
 Forum: http://www.esp8266.nu/forum
 
+This fork is optimized for use in community wireless network [wlan slovenija](http://wlan-si.net) and with the platform nodewatcher.
+
 # Introduction
-ESPEasy is firmware for ESP8266 modules that is pre-programmed with software support for a number of sensors. Simply attach sensors and configure then on the web interface. Supported sensors list: http://www.letscontrolit.com/wiki/index.php/ESPEasy#Applications and more unofficially supported sensors: https://github.com/ESP8266nu/ESPEasyPluginPlayground however these you need to add manually and recompile the firmware.
+ESPEasy is firmware for ESP8266 modules that is pre-programmed with software support for a number of sensors. Simply attach sensors and configure then on the web interface. Supported [sensors list](http://www.letscontrolit.com/wiki/index.php/ESPEasy#Applications) and more [unofficially supported sensors](https://github.com/ESP8266nu/ESPEasyPluginPlayground), however these you need to add manually and recompile the firmware.
 
 # Instructions
 
- 1. Get firmware or compile your own. Follow original instructions for flashing: http://www.letscontrolit.com/wiki/index.php/Tutorial_ESPEasy_Firmware_Upload for nodewatcher support download firmware from this repository.
+ 1. Get firmware or compile your own. Follow [original instructions for flashing](http://www.letscontrolit.com/wiki/index.php/Tutorial_ESPEasy_Firmware_Upload) for nodewatcher support download firmware from [this repository.](ESPEasy.ino.nodemcu.bin)
  2. Upload firmware and wait for the device to boot, may take a few minutes. You will see WiFi network ESP_0 appear and log-in with `configesp` password.
  3. Once connected go to http://192.168.4.1
  4. Configure WiFi network, for example choose `open.wlan-si.net` and enter password, for an open network enter any password.
