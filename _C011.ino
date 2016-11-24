@@ -75,20 +75,25 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
         {
           //workaround since there is no unit field in the system
           String temp_name = String(ExtraTaskSettings.TaskDeviceValueNames[x]);
+          //search for two delimiters
           int commaIndex = temp_name.indexOf(',');
+          int commaIndex2 = temp_name.indexOf(',',commaIndex+1);
 
-          // grouping implementation
-          postDataStr += F("\"group\": \"");
-          postDataStr += ExtraTaskSettings.TaskDeviceName; // same as Task device name
-          postDataStr += F("\", ");
           postDataStr += F("\"name\": \"");
           postDataStr += temp_name.substring(0, commaIndex);
           postDataStr += F("\", \"unit\": \"");
           //safeguard if unit is not entered
           if(commaIndex>0){
-            postDataStr += temp_name.substring(commaIndex+1);
+            postDataStr += temp_name.substring(commaIndex+1,commaIndex2);
+            //we know unit is defined, now lets check for group
+            if(commaIndex2>0){
+              postDataStr += F("\", ");
+              postDataStr += F("\"group\": \"");
+              postDataStr += temp_name.substring(commaIndex2+1);
+            }
           }
-          postDataStr += F("\", \"value\":");          
+          postDataStr += F("\", ");
+          postDataStr += F("\"value\":");          
           postDataStr += toString(UserVar[event->BaseVarIndex + x],ExtraTaskSettings.TaskDeviceValueDecimals[x]);
           postDataStr += F("}");
           //add a comma except on the last one
