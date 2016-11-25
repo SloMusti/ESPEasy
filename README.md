@@ -19,10 +19,10 @@ ESPEasy is firmware for ESP8266 modules that is pre-programmed with software sup
  4. Configure WiFi network, for example choose `open.wlan-si.net` and enter password, for an open network enter any password.
  5. Now the device will connect to the network and let you know the new device IP.
  6. Connect you computer to the network the device is connected to and go the its IP.
- 
+
 ## Register the node with nodewatcher
 1. TODO instructions
- 
+
 ## Configuring for use with nodewatcher
   1. Go to `config` and enter the following:
    1. Enter `Name` to be the same as on nodewatcher
@@ -32,7 +32,7 @@ ESPEasy is firmware for ESP8266 modules that is pre-programmed with software sup
    1. Set `Controller Password` to your sensor UUID as determined on nodewtcher.
    1. Set `Sensor Delay` to how often do you want the node to wake up if put in Sleep mode. Note you need to conenct two pins of ESP together for Sleep mode to work.
    1. Click `Submit`
-   
+
 ## Configuring sensors
  1. Go to `Devices` tab
  1. Click on `Edit` to add a new device
@@ -47,18 +47,16 @@ ESPEasy is firmware for ESP8266 modules that is pre-programmed with software sup
   1. Click on Devices in top menu to see the value
  1. Repeat the process for different sensors, for example with DS18B20.
   1. Configure Temperature by selecting `Device` to be `Temperature - DS18b20`
-  1. Pick `Name` to be `temp_a`, note all devices configured must have different name+IDX combination, all sensors with same name will be group on a graph for nodewatcher.
+  1. Pick `Name` to be `temp_1`, note all devices configured must have a different name.
   1. Set `Delay` to show how often a variable will be reported. 300 is a good value.
   1. Set `IDX / Var` to be non-zero, in this case 1
   1. Set `1st GPIO` to be pin which you have the sensor connected to
-  1. Set `Value Name 1` to what data name on the graph will be, follow by comma and unit, this case: `YourTempName,C`
+  1. Set `Value Name 1` to what data name on the graph will be, follow by comma and unit, follow ed by group setting, this case: `YourTempName,C,group_1`. Note that you do not need to define the group, but all measurements that have the same group defined will be put on a single graph.
   1. Click Submit
   1. Now the `Device Nr` will show one or more ROM IDs if connection to sensors works. Pick first one.
   1. Click Submit
  1. Go to `Device` menu and repeat the process for next sensor
-  1. Pick different IDX then in the first case
+  1. Pick different name.
   1. Click Submit
-  1. Now the `Device Nr` will show one or more ROM IDs if connection to sensors works. Pick second one.
+  1. Now the `Device Nr` will show one or more ROM IDs if connection to sensors works. Pick second one and enter `Value Name 1`
   1. Click Submit
- 
-   
