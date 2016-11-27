@@ -63,16 +63,16 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
         // postDataStr +="},\"rssi\": {\"name\": \"WiFi signal strength\", \"unit\": \"dBm\", \"value\":";
         // postDataStr += String(WiFi.RSSI());
 
-
-        postDataStr += F("},\"");
-        postDataStr += ExtraTaskSettings.TaskDeviceName;
-        postDataStr += F("_");
-        postDataStr += event->idx;;
-        postDataStr += F("\": {");
-        
+        postDataStr += F("},");
         byte valueCount = getValueCountFromSensorType(event->sensorType); // multivalue handling required, figure out json
         for (byte x = 0; x < valueCount; x++)
         {
+          postDataStr += F("\"");
+          postDataStr += ExtraTaskSettings.TaskDeviceName;
+          postDataStr += F("_");
+          postDataStr += x;
+          postDataStr += F("\": {");
+        
           //workaround since there is no unit field in the system
           String temp_name = String(ExtraTaskSettings.TaskDeviceValueNames[x]);
           //search for two delimiters
