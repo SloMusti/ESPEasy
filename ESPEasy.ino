@@ -88,7 +88,7 @@
 #define DEFAULT_SUBNET      "255.255.255.0"     // Enter your subnet
 
 #define DEFAULT_MQTT_TEMPLATE false              // true or false enabled or disabled set mqqt sub and pub
-#define DEFAULT_MQTT_PUB    "sensors/espeasy/%sysname%/%tskname%/%valname%" // Enter your pub
+#define DEFAULT_MQTT_PUB    "sensors/espeasy/%syfIPsname%/%tskname%/%valname%" // Enter your pub
 #define DEFAULT_MQTT_SUB    "sensors/espeasy/%sysname%/#" // Enter your sub
 
 #define DEFAULT_PROTOCOL    1                   // Protocol used for controller communications
