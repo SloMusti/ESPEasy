@@ -148,7 +148,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
         postStr += String(encodedSign);
         postStr += F("\r\n");
         postStr += F("Connection: close\r\n\r\n");
-        postStr += postDataStr;
+        postStr += postDataStr; 
 
         // This will send the request to the server
         client.print(postStr);
