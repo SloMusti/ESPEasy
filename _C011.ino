@@ -6,6 +6,9 @@
 #define CPLUGIN_ID_011         11
 #define CPLUGIN_NAME_011       "Nodewatcher JSON HTTP"
 
+#include "sha256.h"
+#include "Base64.h"
+
 boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
 {
   boolean success = false;
@@ -16,7 +19,7 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
       {
         Protocol[++protocolCount].Number = CPLUGIN_ID_011;
         Protocol[protocolCount].usesMQTT = false;
-        Protocol[protocolCount].usesAccount = false;
+        Protocol[protocolCount].usesAccount = true;
         Protocol[protocolCount].usesPassword = true;
         Protocol[protocolCount].defaultPort = 80;
         break;
@@ -111,8 +114,26 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
         if (Settings.UseDNS)
           hostName = Settings.ControllerHostName;
 
+        char postDataStr_buffer[postDataStr.length()+2];
+        postDataStr.toCharArray(postDataStr_buffer, postDataStr.length()+2);
+        
+        // START: Create signature
+        // https://raw.githubusercontent.com/adamvr/arduino-base64/master/examples/base64/base64.ino
+        
+        int keyLength = strlen(SecuritySettings.ControllerPassword);
+        
+        Sha256.initHmac((const uint8_t*)SecuritySettings.ControllerPassword, keyLength);
+        Sha256.print(postDataStr_buffer);  
+        char* sign = (char*) Sha256.resultHmac();
+        // END: Create signature
+        
+        // START: Get base64 of signature
+        int encodedSignLen = base64_enc_len(HASH_LENGTH);
+        char encodedSign[encodedSignLen];
+        base64_encode(encodedSign, sign, HASH_LENGTH); 
+
         String postStr = F("POST /push/http/");
-        postStr += SecuritySettings.ControllerPassword; // used for UUID
+        postStr += SecuritySettings.ControllerUser; // used for UUID
         postStr += F(" HTTP/1.1\r\n");
         postStr += F("Host: ");
         postStr += hostName;
@@ -121,6 +142,10 @@ boolean CPlugin_011(byte function, struct EventStruct *event, String& string)
         postStr += F("Content-Type: text/plain\r\n");
         postStr += F("Content-Length: ");
         postStr += postDataStr.length();
+        postStr += F("\r\n");
+        postStr += F("X-Nodewatcher-Signature-Algorithm: hmac-sha256\r\n");
+        postStr += F("X-Nodewatcher-Signature: ");
+        postStr += String(encodedSign);
         postStr += F("\r\n");
         postStr += F("Connection: close\r\n\r\n");
         postStr += postDataStr;
