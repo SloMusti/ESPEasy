@@ -88,7 +88,7 @@
 #define DEFAULT_SUBNET      "255.255.255.0"     // Enter your subnet
 
 #define DEFAULT_MQTT_TEMPLATE false              // true or false enabled or disabled set mqqt sub and pub
-#define DEFAULT_MQTT_PUB    "sensors/espeasy/%syfIPsname%/%tskname%/%valname%" // Enter your pub
+#define DEFAULT_MQTT_PUB    "sensors/espeasy/%sysname%/%tskname%/%valname%" // Enter your pub
 #define DEFAULT_MQTT_SUB    "sensors/espeasy/%sysname%/#" // Enter your sub
 
 #define DEFAULT_PROTOCOL    1                   // Protocol used for controller communications
@@ -118,7 +118,7 @@
 #define ESP_PROJECT_PID           2015050101L
 #define ESP_EASY
 #define VERSION                             9
-#define BUILD                             146
+#define BUILD                             147
 #define BUILD_NOTES                        ""
 #define FEATURE_SPIFFS                  false
 
@@ -280,9 +280,10 @@ struct SecurityStruct
   char          WifiSSID[32];
   char          WifiKey[64];
   char          WifiAPKey[64];
-  char          ControllerUser[24];
+  char          ControllerUser[64];
   char          ControllerPassword[64];
   char          Password[26];
+} SecuritySettings;
 
 struct SettingsStruct
 {
@@ -1012,6 +1013,7 @@ void backgroundtasks()
   WebServer.handleClient();
   MQTTclient.loop();
   statusLED(false);
+  checkUDP();
   yield();
 }
 
