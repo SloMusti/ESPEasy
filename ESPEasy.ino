@@ -280,7 +280,7 @@ struct SecurityStruct
   char          WifiSSID[32];
   char          WifiKey[64];
   char          WifiAPKey[64];
-  char          ControllerUser[64];
+  char          ControllerUser[24];
   char          ControllerPassword[64];
   char          Password[26];
 
